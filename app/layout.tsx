@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// 👇 Саяны үүсгэсэн Providers-ийг зөв замаар нь import хийж байна
+import Providers from "@/components/ui/providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +29,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {/* 👇 children-ийг Providers-аар ингэж ороож өгнө */}
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
