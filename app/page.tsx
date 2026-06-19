@@ -39,10 +39,10 @@ export default function TodoPage() {
       setCurrentPage(1);
       queryClient.invalidateQueries({ queryKey: ["todos"] });
       setNewTodoTitle("");
-      toast.success("Шинэ тэмдэглэл амжилттай нэмэгдлээ!");
+      toast.success("New todo added successfully!");
     },
     onError: (err: any) => {
-      toast.error(`Нэмэхэд алдаа гарлаа: ${err.message}`);
+      toast.error(`Add error: ${err.message}`);
     },
   });
 
@@ -51,10 +51,10 @@ export default function TodoPage() {
       toggleTodo(id, completed, currentPage, ITEMS_PER_PAGE),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
-      toast.info("Тэмдэглэлийн төлөв шинэчлэгдлээ.");
+      toast.info("Todo status updated successfully!");
     },
     onError: (err: any) => {
-      toast.error(`Шинэчлэхэд алдаа гарлаа: ${err.message}`);
+      toast.error(`Update error: ${err.message}`);
     },
   });
 
