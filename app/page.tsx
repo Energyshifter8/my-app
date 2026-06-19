@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { fetchTodos, addTodo, toggleTodo } from "@/app/api/actions";
 import { CustomCard } from "@/components/ui/CustomCard";
 import { CustomPagination } from "@/components/ui/CustomPagination";
+import { toast } from "sonner";
 
 interface Todo {
   id: string;
@@ -38,6 +39,10 @@ export default function TodoPage() {
       setCurrentPage(1);
       queryClient.invalidateQueries({ queryKey: ["todos"] });
       setNewTodoTitle("");
+      toast.success("Шинэ тэмдэглэл амжилттай нэмэгдлээ!");
+    },
+    onError: (err: any) => {
+      toast.error(`Нэмэхэд алдаа гарлаа: ${err.message}`);
     },
   });
 
@@ -46,6 +51,10 @@ export default function TodoPage() {
       toggleTodo(id, completed, currentPage, ITEMS_PER_PAGE),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
+      toast.info("Тэмдэглэлийн төлөв шинэчлэгдлээ.");
+    },
+    onError: (err: any) => {
+      toast.error(`Шинэчлэхэд алдаа гарлаа: ${err.message}`);
     },
   });
 
